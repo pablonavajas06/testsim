@@ -8,7 +8,7 @@
     STAR --runThreadN 4 --runMode genomeGenerate \
          --genomeDir res/genome/star_index/ \
          --genomeFastaFiles res/genome/ecoli.fasta \
-
+         --genomeSAindexNbases 9
 for sampleid in $(ls data/*.fastq.gz | cut -d "_" -f1 | sed 's:data/::' | sort | uniq)
 do
     if [ "$#" -eq 1 ]
@@ -16,7 +16,7 @@ do
 	sampleid=$1
     	echo "Running FastQC..."
     	mkdir -p out/fastqc
-    	fastqc -o out/fastqc data/${sampleid}*.fastq.gz
+        fastqc -o out/fastqc data/${sampleid}*.fastq.gz
     	echo
     	echo "Running cutadapt..."
     	mkdir -p log/cutadapt
